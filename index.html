@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YOUNG VANDALS &copy;</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/a-another-tag" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1a1a;
+            --outline: #e88c00;
+            --text-glow: #f2b705;
+            --night-blue: #0d1f2d;
+            --white: #f5f5f5;
+            --shadow-3d: 3px 3px 0 var(--night-blue), 6px 6px 0 rgba(0,0,0,0.4);
+            --neon-glow: 0 0 10px rgba(232, 140, 0, 0.6), 0 0 30px rgba(242, 183, 5, 0.3);
+            --font-tag: 'A Another Tag', 'Permanent Marker', 'Bangers', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .video-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.45) saturate(0.8);
+            transform: scale(1.05);
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem 1.5rem;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            width: clamp(180px, 60vw, 320px);
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(232,140,0,0.5)) drop-shadow(4px 6px 0 var(--night-blue));
+            animation: logoPulse 3s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+        .logo-img:active {
+            transform: scale(0.95);
+        }
+        @keyframes logoPulse {
+            0%,100% { filter: drop-shadow(0 0 20px rgba(232,140,0,0.5)) drop-shadow(4px 6px 0 var(--night-blue)); }
+            50% { filter: drop-shadow(0 0 35px rgba(242,183,5,0.7)) drop-shadow(6px 8px 0 var(--night-blue)); }
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            padding: 0 2rem 3rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            max-width: 360px;
+            padding: 1rem 1.5rem;
+            font-family: var(--font-tag);
+            font-size: 1.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 3px solid var(--outline);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            background: var(--bg);
+            color: var(--text-glow);
+            text-shadow: 0 0 12px rgba(242,183,5,0.5);
+            box-shadow: var(--shadow-3d);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            outline: none;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px dashed rgba(232,140,0,0.3);
+            border-radius: 3px;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 6px;
+            right: -6px;
+            top: 6px;
+            background: var(--night-blue);
+            z-index: -1;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+
+        .btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0 var(--night-blue), 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .btn:active::after {
+            bottom: -3px;
+            left: 3px;
+            right: -3px;
+            top: 3px;
+        }
+
+        .btn--shop {
+            border-color: var(--outline);
+            color: var(--text-glow);
+            font-size: 1.7rem;
+            letter-spacing: 5px;
+        }
+        .btn--insta {
+            border-color: #e88c00;
+            color: #f2b705;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d1f2d 100%);
+        }
+        .btn--whatsapp {
+            border-color: #25D366;
+            color: #25D366;
+            text-shadow: 0 0 10px rgba(37,211,102,0.5);
+            box-shadow: 3px 3px 0 var(--night-blue), 6px 6px 0 rgba(0,0,0,0.4);
+        }
+        .btn--whatsapp::after {
+            background: #0d1f2d;
+        }
+
+        .btn-symbol {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .shop-section {
+            padding: 3rem 1.5rem 4rem;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(26,26,26,0.95) 0%, rgba(13,31,45,0.98) 100%);
+            border-top: 3px solid var(--outline);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .section-tag {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #f2b705;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: var(--night-blue);
+            padding: 0.4rem 1.2rem;
+            border-radius: 3px;
+            margin-bottom: 0.7rem;
+            border: 1px solid rgba(242,183,5,0.4);
+        }
+        .section-title {
+            font-family: var(--font-tag);
+            font-size: clamp(2.4rem, 7vw, 3.2rem);
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(242,183,5,0.5), 3px 3px 0 var(--night-blue);
+            margin: 0;
+        }
+
+        .vetrina {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #121212;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #444;
+            box-shadow: 4px 4px 0 var(--night-blue), 8px 8px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .product-card:active {
+            transform: scale(0.97);
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--outline);
+            cursor: pointer;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .product-img:hover img {
+            transform: scale(1.03);
+        }
+        .product-img .placeholder-art {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3rem;
+            color: #333;
+            text-shadow: 2px 2px 0 var(--night-blue);
+            background:
+                radial-gradient(circle at 30% 40%, rgba(232,140,0,0.12) 0%, transparent 55%),
+                radial-gradient(circle at 65% 55%, rgba(242,183,5,0.08) 0%, transparent 55%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Venduto badge */
+        .sold-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d32f2f;
+            color: white;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 12px rgba(211,47,47,0.6);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+        .product-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #ffffff 0%, #d4d4d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .product-price {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--text-glow);
+            margin: 0.3rem 0 0.8rem;
+            text-shadow: 0 0 12px rgba(242,183,5,0.4);
+            letter-spacing: 1px;
+        }
+        .btn-vinted {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            width: 100%;
+            padding: 0.8rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            border: 2px solid var(--outline);
+            border-radius: 5px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+        }
+        .btn-vinted:active {
+            background: var(--outline);
+            color: #000;
+            border-color: var(--text-glow);
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+        .btn-vinted.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            background: #333;
+            border-color: #555;
+            color: #888;
+        }
+
+        /* Lightbox / Popup */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: background 0.2s;
+        }
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .lightbox-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .lightbox-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .lightbox-image-container {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 2rem;
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+        .lightbox-image-container.zoomed {
+            transform: scale(2);
+            cursor: zoom-out;
+        }
+        .lightbox-image-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.8rem;
+        }
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+        }
+        .lightbox-nav button:active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .lightbox-dots {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .lightbox-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: background 0.2s;
+        }
+        .lightbox-dots .dot.active {
+            background: var(--outline);
+            box-shadow: 0 0 8px var(--outline);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem 2.5rem;
+            background: var(--night-blue);
+            border-top: 2px solid rgba(232,140,0,0.2);
+            position: relative;
+            z-index: 1;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .footer a {
+            color: var(--outline);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0.8rem 0;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 600px) {
+            .vetrina {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 600px;
+            }
+            .btn {
+                max-width: 400px;
+                font-size: 1.7rem;
+                padding: 1.1rem 1.8rem;
+            }
+            .btn--shop {
+                font-size: 1.9rem;
+            }
+        }
+        @media (min-width: 900px) {
+            .vetrina {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1000px;
+            }
+            .hero {
+                gap: 1.5rem;
+            }
+            .btn {
+                font-size: 1.9rem;
+            }
+            .btn--shop {
+                font-size: 2.1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo-img { animation: none; }
+            .btn { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-bg">
+        <video autoplay muted loop playsinline preload="auto" poster="">
+            <source src="contents/yv_edit_header.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="main-container">
+
+        <header class="header">
+            <img
+                src="contents/logo_young_vandals.png"
+                alt="YOUNG VANDALS"
+                class="logo-img"
+                loading="eager"
+            >
+        </header>
+
+        <section class="hero">
+            <a href="#shop" class="btn btn--shop">
+                <span class="btn-symbol">&#9660;</span> Visualizza lo Shop
+            </a>
+            <a href="https://www.instagram.com/young_vandals_art/" target="_blank" rel="noopener" class="btn btn--insta">
+                <span class="btn-symbol">&#9679;</span> Instagram
+            </a>
+            <a href="https://wa.me/393509835245" target="_blank" rel="noopener" class="btn btn--whatsapp">
+                <span class="btn-symbol">&#9990;</span> Commissioni WA
+            </a>
+        </section>
+    </div>
+
+    <section id="shop" class="shop-section">
+        <div class="section-header">
+            <span class="section-tag">LIMITED Drops</span>
+            <h2 class="section-title">&#9670; VETRINA</h2>
+	    <p style="color: #aaa; font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-top: 0.5rem; text-align: center;">PAGAMENTO IN CONTANTI SU INCONTRO</p>
+        </div>
+
+        <div class="vetrina" id="vetrina-container">
+            <!-- Le card saranno generate da JavaScript -->
+        </div>
+    </section>
+
+    <!-- Lightbox Popup -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <div class="lightbox-dots" id="lightbox-dots"></div>
+        <div class="lightbox-gallery" id="lightbox-gallery"></div>
+        <div class="lightbox-nav">
+            <button id="lightbox-prev">&#10094;</button>
+            <button id="lightbox-next">&#10095;</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>YOUNG VANDALS - BARI</p>
+        <div class="footer-links">
+            <a href="https://www.instagram.com/young_vandals_art/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://wa.me/393509835245" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.vinted.it/member/248334179-youngvandals" target="_blank" rel="noopener">Vinted Shop</a>
+        </div>
+        <p style="margin-top:0.6rem;font-size:0.7rem;">Pagamento sicuro tramite Vinted &middot; Spedizione tracciata</p>
+    </footer>
+
+    <script>
+        /**
+         * ======================================================
+         * CONFIGURAZIONE PRODOTTI VETRINA
+         * Modifica qui: nome, prezzo, link Vinted, venduto (true/false),
+         * e le immagini per ogni prodotto (percorso relativo).
+         * Le immagini devono trovarsi in /contents/products/
+         * ======================================================
+         */
+        const products = [
+            {
+                id: 1,
+                name: '"Gommarosa" Graffiti Canvas',
+                price: '40',
+                vintedLink: 'https://www.vinted.it/items/6540828244-gommarosa-graffiti-canvas-tecnice-miste',
+                sold: false,  // Imposta a true se venduto
+                images: [
+                    'contents/products/prodotto_1.png',
+                    'contents/products/prodotto_1_2.png',
+                    'contents/products/prodotto_1_3.png'
+                ]
+            },
+            {
+                id: 2,
+                name: 'Tracce di Ieri',
+                price: '20',
+                vintedLink: 'https://www.vinted.it/items/9185727462-tracce-di-ieri-graffiti-diorama',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_2.png',
+                    'contents/products/prodotto_2_2.png',
+		    'contents/products/prodotto_2_3.png',
+		    'contents/products/prodotto_2_4.png'
+                ]
+            },
+            {
+                id: 3,
+                name: 'Fingerpark di città',
+                price: '12',
+                vintedLink: 'https://www.vinted.it/items/9184402681-rampa-per-fingerboard-in-miniatura-artigianale-con-grafiche-graffiti-originali',
+                sold: false, 
+                images: [
+                    'contents/products/prodotto_3.png',
+		    'contents/products/prodotto_3_2.png',
+		    'contents/products/prodotto_3_3.png'
+                ]
+            },
+            {
+                id: 4,
+                name: 'Lampada Alley Crimes',
+                price: '15',
+                vintedLink: 'https://www.vinted.it/items/9186470219-lampada-diorama-alley-crimes-led-usb',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_4.jpg',
+                    'contents/products/prodotto_4_2.png',
+                    'contents/products/prodotto_4_3.jpg',
+                    'contents/products/prodotto_4_4.png'
+                ]
+            },
+	    {
+                id: 5,
+                name: 'Coppia di cartelli',
+                price: '5',
+                vintedLink: 'https://www.vinted.it/items/9186187492-coppia-di-cartelli-personalizzati',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_5.png'
+                ]
+            },
+	    {
+                id: 6,
+                name: '"Marylinn" Foglio A2',
+                price: '10',
+                vintedLink: 'https://www.vinted.it/items/6759404303-marylinn-foglio-a2',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_6.png',
+		    'contents/products/prodotto_6_2.png',
+		    'contents/products/prodotto_6_3.png'
+                ]
+            },
+	    {
+                id: 7,
+                name: '"Ma Girl" foglio a3',
+                price: '10',
+                vintedLink: 'https://www.vinted.it/items/6759320037-ma-girl-foglio-a3',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_7.png',
+		    'contents/products/prodotto_7_2.png',
+		    'contents/products/prodotto_7_3.png'
+                ]
+            },
+	    {
+                id: 8,
+                name: '"Ready for party" foglio a2',
+                price: '10',
+                vintedLink: 'https://www.vinted.it/items/6759661498-ready-to-party-foglio-a2',
+                sold: false,
+                images: [
+                    'contents/products/prodotto_8.png',
+		    'contents/products/prodotto_8_2.png',
+		    'contents/products/prodotto_8_3.png'
+                ]
+            }
+
+        ];
+
+        // Generazione dinamica delle card prodotto
+        function renderProducts() {
+            const container = document.getElementById('vetrina-container');
+            container.innerHTML = '';
+
+            products.forEach((prod, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                // Immagine (prima immagine della galleria o placeholder)
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'product-img';
+                if (prod.images.length > 0) {
+                    const img = document.createElement('img');
+                    img.src = prod.images[0];
+                    img.alt = prod.name;
+                    img.loading = 'lazy';
+                    imgDiv.appendChild(img);
+                } else {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'placeholder-art';
+                    placeholder.innerHTML = '&#127912;';
+                    imgDiv.appendChild(placeholder);
+                }
+
+                // Badge venduto
+                if (prod.sold) {
+                    const badge = document.createElement('div');
+                    badge.className = 'sold-badge';
+                    badge.textContent = 'VENDUTO';
+                    imgDiv.appendChild(badge);
+                }
+
+                // Click per aprire lightbox
+                imgDiv.addEventListener('click', () => openLightbox(prod));
+
+                card.appendChild(imgDiv);
+
+                // Info prodotto
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'product-info';
+
+                const nameEl = document.createElement('h3');
+                nameEl.className = 'product-name';
+                nameEl.textContent = prod.name;
+                infoDiv.appendChild(nameEl);
+
+                const priceEl = document.createElement('p');
+                priceEl.className = 'product-price';
+                priceEl.textContent = `€ ${prod.price}`;
+                infoDiv.appendChild(priceEl);
+
+                // Bottone Vinted (disabilitato se venduto)
+                const btnVinted = document.createElement('a');
+                btnVinted.className = 'btn-vinted' + (prod.sold ? ' disabled' : '');
+                btnVinted.href = prod.sold ? '#' : prod.vintedLink;
+                btnVinted.target = '_blank';
+                btnVinted.rel = 'noopener';
+                btnVinted.innerHTML = '&#9658; Vinted';
+                if (prod.sold) {
+                    btnVinted.setAttribute('aria-disabled', 'true');
+                    btnVinted.addEventListener('click', (e) => e.preventDefault());
+                }
+                infoDiv.appendChild(btnVinted);
+
+                card.appendChild(infoDiv);
+                container.appendChild(card);
+            });
+        }
+
+        // ==================== LIGHTBOX LOGIC ====================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxGallery = document.getElementById('lightbox-gallery');
+        const lightboxDots = document.getElementById('lightbox-dots');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        let currentProduct = null;
+        let currentImageIndex = 0;
+        let zoomed = false;
+
+        function openLightbox(product) {
+            currentProduct = product;
+            currentImageIndex = 0;
+            zoomed = false;
+            populateGallery(product.images);
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateGalleryScroll();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            currentProduct = null;
+            lightboxGallery.innerHTML = '';
+            lightboxDots.innerHTML = '';
+        }
+
+        function populateGallery(images) {
+            lightboxGallery.innerHTML = '';
+            lightboxDots.innerHTML = '';
+
+            images.forEach((src, i) => {
+                // Dot indicator
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => {
+                    currentImageIndex = i;
+                    updateGalleryScroll();
+                });
+                lightboxDots.appendChild(dot);
+
+                // Image container
+                const container = document.createElement('div');
+                container.className = 'lightbox-image-container';
+                container.dataset.index = i;
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `${currentProduct?.name || ''} - immagine ${i+1}`;
+                img.draggable = false;
+                container.appendChild(img);
+
+                // Zoom toggle al doppio click
+                container.addEventListener('dblclick', (e) => {
+                    e.preventDefault();
+                    zoomed = !zoomed;
+                    container.classList.toggle('zoomed', zoomed);
+                });
+
+                // Supporto pinch zoom (semplificato: toggle con doppio tap)
+                // Su mobile il doppio tap attiva già zoom nativo in alcuni casi,
+                // ma con il nostro dblclick funziona.
+
+                lightboxGallery.appendChild(container);
+            });
+
+            // Scroll snap listener per aggiornare dots
+            lightboxGallery.addEventListener('scroll', handleScrollUpdate, { passive: true });
+        }
+
+        function handleScrollUpdate() {
+            const containers = Array.from(lightboxGallery.querySelectorAll('.lightbox-image-container'));
+            const scrollLeft = lightboxGallery.scrollLeft;
+            const width = lightboxGallery.clientWidth;
+            if (width === 0) return;
+            const newIndex = Math.round(scrollLeft / width);
+            if (newIndex !== currentImageIndex && newIndex >= 0 && newIndex < containers.length) {
+                currentImageIndex = newIndex;
+                updateDots();
+                // Reset zoom quando si cambia immagine
+                zoomed = false;
+                containers.forEach(c => c.classList.remove('zoomed'));
+            }
+        }
+
+        function updateDots() {
+            const dots = Array.from(lightboxDots.querySelectorAll('.dot'));
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentImageIndex);
+            });
+        }
+
+        function updateGalleryScroll() {
+            const width = lightboxGallery.clientWidth;
+            lightboxGallery.scrollTo({
+                left: currentImageIndex * width,
+                behavior: 'smooth'
+            });
+            updateDots();
+            zoomed = false;
+            const containers = lightboxGallery.querySelectorAll('.lightbox-image-container');
+            containers.forEach(c => c.classList.remove('zoomed'));
+        }
+
+        function navigateGallery(direction) {
+            if (!currentProduct) return;
+            const max = currentProduct.images.length - 1;
+            currentImageIndex = Math.min(max, Math.max(0, currentImageIndex + direction));
+            updateGalleryScroll();
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        lightboxPrev.addEventListener('click', () => navigateGallery(-1));
+        lightboxNext.addEventListener('click', () => navigateGallery(1));
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateGallery(-1);
+            if (e.key === 'ArrowRight') navigateGallery(1);
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        lightboxGallery.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        lightboxGallery.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                navigateGallery(diff > 0 ? 1 : -1);
+            }
+        });
+
+        // Avvio
+        renderProducts();
+    </script>
+</body>
+</html>
